@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { InstructorLayout } from "./layout";
+import { InstructorLayout } from "./-layout";
 
 export const Route = createFileRoute("/instructor/profile")({
   component: InstructorProfile,
