@@ -8,7 +8,10 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+
 @Configuration
+@ConditionalOnProperty(name = "spring.rabbitmq.enabled", havingValue = "true")
 public class RabbitMQConfig {
 
     public static final String QUEUE = "notification.queue";

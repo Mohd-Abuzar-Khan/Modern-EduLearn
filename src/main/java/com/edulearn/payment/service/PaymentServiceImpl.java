@@ -10,7 +10,7 @@ import com.razorpay.RazorpayClient;
 import org.json.JSONObject;
 import com.edulearn.notification.dto.NotificationDto;
 import com.edulearn.notification.config.RabbitMQConfig;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -44,7 +44,7 @@ public class PaymentServiceImpl implements PaymentService {
     private EnrollmentClient enrollmentClient;
 
     @Autowired(required = false)
-    private RabbitTemplate rabbitTemplate;
+    private AmqpTemplate rabbitTemplate;
 
     @Autowired
     private ApplicationEventPublisher eventPublisher;

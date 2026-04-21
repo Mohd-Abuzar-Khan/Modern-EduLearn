@@ -5,7 +5,7 @@ import com.edulearn.enrollment.entity.Enrollment;
 import com.edulearn.enrollment.repository.EnrollmentRepository;
 import com.edulearn.notification.dto.NotificationDto;
 import com.edulearn.notification.config.RabbitMQConfig;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     private EnrollmentRepository enrollmentRepository;
 
     @Autowired(required = false)
-    private RabbitTemplate rabbitTemplate;
+    private AmqpTemplate rabbitTemplate;
 
     @Autowired
     private CourseClient courseClient;
