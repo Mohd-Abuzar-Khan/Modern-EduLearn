@@ -20,7 +20,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     @Autowired
     private EnrollmentRepository enrollmentRepository;
 
-    @Autowired
+    @Autowired(required = false)
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
@@ -57,8 +57,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
             notification.setRelatedEntityId(courseId);
             notification.setRelatedEntityType("COURSE");
 
-            rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.ROUTING_KEY, notification);
-            System.out.println("Notification sent to RabbitMQ for student: " + studentId);
+            if (rabbitTemplate != null) {
+                rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.ROUTING_KEY, notification);
+                System.out.println("Notification sent to RabbitMQ for student: " + studentId);
+            } else {
+                System.out.println("RabbitMQ not configured, skipping notification for student: " + studentId);
+            }
         } catch (Exception e) {
             System.err.println("Failed to send RabbitMQ notification: " + e.getMessage());
         }
