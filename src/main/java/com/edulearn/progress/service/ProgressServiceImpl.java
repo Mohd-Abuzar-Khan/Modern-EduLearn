@@ -49,6 +49,15 @@ public class ProgressServiceImpl implements ProgressService {
     @Value("${lesson.service.url}")
     private String lessonServiceUrl;
 
+    @Value("${enrollment.service.url}")
+    private String enrollmentServiceUrl;
+
+    @Value("${course.service.url}")
+    private String courseServiceUrl;
+
+    @Value("${auth.service.url}")
+    private String authServiceUrl;
+
     @Override
     @Transactional
     public void trackProgress(Long studentId, Long courseId, Long lessonId, Integer watchedSeconds) {
@@ -126,8 +135,8 @@ public class ProgressServiceImpl implements ProgressService {
 
         // SYNC: Notify enrollment-service about the new progress percentage
         try {
-            // enrollment-service is on 8084
-            String enrollmentUrl = "http://localhost:8084/api/v1/enrollments/progress";
+            // enrollment-service is now part of the monolith
+            String enrollmentUrl = enrollmentServiceUrl + "/enrollments/progress";
             Map<String, Object> syncReq = new HashMap<>();
             syncReq.put("studentId", studentId);
             syncReq.put("courseId", courseId);
@@ -149,7 +158,7 @@ public class ProgressServiceImpl implements ProgressService {
         int totalLessons = 0;
         try {
             Integer count = restTemplate.getForObject(
-                    "http://localhost:8083" + "/api/v1/lessons/count/" + courseId, Integer.class);
+                    lessonServiceUrl + "/count/" + courseId, Integer.class);
             totalLessons = (count != null && count > 0) ? count : 0;
         } catch (Exception e) {
             System.err.println("Could not reach lesson-service: " + e.getMessage());
@@ -164,7 +173,7 @@ public class ProgressServiceImpl implements ProgressService {
         if (percentage < 100) {
             try {
                 Map<?, ?> enrollRes = restTemplate.getForObject(
-                        "http://localhost:8084/api/v1/enrollments/student/" + studentId, Map.class);
+                        enrollmentServiceUrl + "/enrollments/student/" + studentId, Map.class);
                 if (enrollRes != null && enrollRes.containsKey("data")) {
                     List<?> list = (List<?>) enrollRes.get("data");
                     for (Object obj : list) {
@@ -215,7 +224,7 @@ public class ProgressServiceImpl implements ProgressService {
                     + "%. Checking enrollment-service fallback...");
             try {
                 // Fallback: Check enrollment-service directly (e.g. for manual completions)
-                String enrollmentUrl = "http://localhost:8084/api/v1/enrollments/student/" + studentId;
+                String enrollmentUrl = enrollmentServiceUrl + "/enrollments/student/" + studentId;
                 Map<String, Object> response = restTemplate.getForObject(enrollmentUrl, Map.class);
                 List<?> enrollments = null;
                 if (response != null && response.containsKey("data")) {
@@ -257,7 +266,7 @@ public class ProgressServiceImpl implements ProgressService {
         try {
             // Course name fetch
             Map<?, ?> courseRes = restTemplate.getForObject(
-                    "http://localhost:8082" + "/api/v1/courses/" + courseId, Map.class);
+                    courseServiceUrl + "/courses/" + courseId, Map.class);
             if (courseRes != null && courseRes.containsKey("data")) {
                 Map<?, ?> data = (Map<?, ?>) courseRes.get("data");
                 if (data != null && data.containsKey("title")) {
@@ -267,7 +276,7 @@ public class ProgressServiceImpl implements ProgressService {
 
             // Student name fetch from auth-service (Port 8081)
             Map<?, ?> userRes = restTemplate.getForObject(
-                    "http://localhost:8081/auth/user/" + studentId, Map.class);
+                    authServiceUrl + "/user/" + studentId, Map.class);
             
             if (userRes != null && userRes.get("data") != null) {
                 Map<?, ?> data = (Map<?, ?>) userRes.get("data");
@@ -281,7 +290,7 @@ public class ProgressServiceImpl implements ProgressService {
             System.err.println("Side-fetch for student name failed: " + e.getMessage());
             // Fallback: If direct service call fails, try Gateway (Port 8080)
             try {
-                Map<?, ?> userRes = restTemplate.getForObject("http://localhost:8080/auth/user/" + studentId, Map.class);
+                Map<?, ?> userRes = restTemplate.getForObject(authServiceUrl + "/user/" + studentId, Map.class);
                 if (userRes != null && userRes.get("data") != null) {
                     Map<?, ?> data = (Map<?, ?>) userRes.get("data");
                     if (data.get("fullName") != null) studentName = String.valueOf(data.get("fullName"));
