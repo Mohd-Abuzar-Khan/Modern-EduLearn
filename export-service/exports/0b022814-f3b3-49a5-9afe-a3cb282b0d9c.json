@@ -1,0 +1,71 @@
+{
+  "resumeId" : 15,
+  "userId" : 13,
+  "title" : "Walmart ",
+  "targetJobTitle" : "Junior QA",
+  "templateId" : 1,
+  "atsScore" : 0,
+  "status" : "PUBLISHED",
+  "language" : "en",
+  "isPublic" : true,
+  "viewCount" : 2,
+  "ownerName" : "Abuzar Khan",
+  "ownerAvatar" : "",
+  "sections" : [ {
+    "sectionId" : 29,
+    "sectionType" : "PERSONAL_INFO",
+    "title" : "Personal Info",
+    "content" : "{\"name\":\"Abuzar Khan\",\"email\":\"abbuzar982@gmail.com\",\"phone\":\"9522248314\",\"location\":\"Bhopal\",\"title\":\"Full-Stack Developer\"}",
+    "displayOrder" : 0,
+    "isVisible" : true,
+    "aiGenerated" : false,
+    "createdAt" : "2026-04-24T15:16:29.568164"
+  }, {
+    "sectionId" : 30,
+    "sectionType" : "SUMMARY",
+    "title" : "Summary",
+    "content" : "{\"summary\":\"Detail-oriented Software Engineer with 6+ years of experience in building scalable web applications. Expert in Java, Spring Boot, and React. Proven track record of optimizing system performance by 40% and leading cross-functional teams to deliver high-quality software solutions.\"}",
+    "displayOrder" : 1,
+    "isVisible" : true,
+    "aiGenerated" : false,
+    "createdAt" : "2026-04-24T15:17:04.707793"
+  }, {
+    "sectionId" : 31,
+    "sectionType" : "EXPERIENCE",
+    "title" : "Experience",
+    "content" : "[{\"company\":\"TechFlow Solutions\",\"position\":\" Senior Software Engineer \",\"startDate\":\"06/2026\",\"endDate\":\"present\",\"description\":\"• Spearheaded the migration of a monolithic legacy system to a microservices architecture using Spring Boot and Docker, improving deployment frequency by 60%.\\n• Designed and implemented a real-time data processing pipeline using Apache Kafka, handling over 1 million events per day.\\n• Mentored a team of 5 junior developers, conducting code reviews and implementing best practices for CI/CD using Jenkins and GitHub Actions.\\n• Optimized SQL queries and database indexing, reducing API response times by 30%.\"}]",
+    "displayOrder" : 2,
+    "isVisible" : true,
+    "aiGenerated" : false,
+    "createdAt" : "2026-04-24T15:18:12.981227"
+  }, {
+    "sectionId" : 32,
+    "sectionType" : "EDUCATION",
+    "title" : "Education",
+    "content" : "[{\"school\":\"State University\",\"degree\":\"Bachelor of Science in Computer Science \",\"startDate\":\"\",\"endDate\":\"\"}]",
+    "displayOrder" : 3,
+    "isVisible" : true,
+    "aiGenerated" : false,
+    "createdAt" : "2026-04-24T15:18:43.600513"
+  }, {
+    "sectionId" : 33,
+    "sectionType" : "SKILLS",
+    "title" : "Skills",
+    "content" : "{\"skills\":\"Java, JavaScript (ES6+), SQL, HTML5, CSS3\"}",
+    "displayOrder" : 4,
+    "isVisible" : true,
+    "aiGenerated" : false,
+    "createdAt" : "2026-04-24T15:18:52.833958"
+  }, {
+    "sectionId" : 34,
+    "sectionType" : "PROJECTS",
+    "title" : "Projects",
+    "content" : "[{\"name\":\"Innovate Digital \",\"role\":\" Software Developer\",\"description\":\"• Developed and maintained customer-facing dashboards using React.js and Redux, resulting in a 25% increase in user engagement.\\n• Integrated third-party APIs for payment processing (Stripe) and authentication (OAuth2).\\n• Collaborated with UX/UI designers to implement responsive designs, ensuring a seamless experience across mobile and desktop.\",\"link\":\"\"}]",
+    "displayOrder" : 5,
+    "isVisible" : true,
+    "aiGenerated" : false,
+    "createdAt" : "2026-04-24T15:19:22.933859"
+  } ],
+  "createdAt" : "2026-04-24T15:15:43.547335",
+  "updatedAt" : "2026-04-26T17:04:02.225202"
+}
